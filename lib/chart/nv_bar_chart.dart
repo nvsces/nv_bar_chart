@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:nv_bar_chart/bar_data.dart';
 import 'package:nv_bar_chart/chart/bar_style.dart';
+import 'package:nv_bar_chart/chart/grid_style.dart';
 import 'package:nv_bar_chart/chart/nv_bar_chart_painter.dart';
 import 'package:nv_bar_chart/chart/nv_bar_painter_params.dart';
 
@@ -13,6 +14,7 @@ class NvBarChart extends StatefulWidget {
   final ValueChanged<BarData>? onTap;
   final ValueChanged<double>? onCandleResize;
   final BarStyle? barStyle;
+  final GridStyle? gridStyle;
 
   const NvBarChart({
     Key? key,
@@ -20,6 +22,7 @@ class NvBarChart extends StatefulWidget {
     this.barStyle,
     this.initialVisibleCandleCount = 5,
     this.onTap,
+    this.gridStyle,
     this.onCandleResize,
   }) : super(key: key);
 
@@ -39,6 +42,7 @@ class _NvBarChartState extends State<NvBarChart> {
   NvBarPainterParams? _prevParams;
 
   BarStyle get barStyle => widget.barStyle ?? BarStyle.defaultStyle();
+  GridStyle get gridStyle => widget.gridStyle ?? GridStyle.gefaultStyle();
 
   List<BarData> get bars => [
         BarData(
@@ -83,6 +87,7 @@ class _NvBarChartState extends State<NvBarChart> {
               final childTween = TweenAnimationBuilder(
                 tween: MyPainterParamsTween(
                   end: NvBarPainterParams(
+                    gridStyle: gridStyle,
                     dateStyle: barStyle.dateStyle,
                     valueStyle: barStyle.valueStyle,
                     colorBar1: barStyle.colorBar1,

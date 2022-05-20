@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:nv_bar_chart/chart/grid_style.dart';
 
 import '../bar_data.dart';
 
@@ -18,6 +19,7 @@ class NvBarPainterParams {
   final Color? colorBar2;
   final TextStyle? valueStyle;
   final TextStyle? dateStyle;
+  final GridStyle gridStyle;
 
   final double xShift;
 
@@ -34,6 +36,7 @@ class NvBarPainterParams {
     this.colorBar2,
     this.valueStyle,
     this.dateStyle,
+    required this.gridStyle,
   });
 
   double get chartWidth => size.width - 40;
@@ -51,6 +54,7 @@ class NvBarPainterParams {
         lerpDouble(getField(a), getField(b), t)!;
     return NvBarPainterParams(
       dateStyle: b.dateStyle,
+      gridStyle: b.gridStyle,
       valueStyle: b.valueStyle,
       colorBar1: b.colorBar1,
       colorBar2: b.colorBar2,

@@ -33,21 +33,21 @@ class NvBarChartPainter extends CustomPainter {
         Offset(params.size.width, params.fitValue(y)),
         Paint()
           ..strokeWidth = 0.5
-          ..color = Colors.black,
+          ..color = params.gridStyle.color,
       );
-      final priceTp = TextPainter(
+      final gridTp = TextPainter(
         text: TextSpan(
           text: y.toStringAsFixed(1),
-          style: TextStyle(color: Colors.black),
+          style: params.gridStyle.textStyle,
         ),
       )
         ..textDirection = TextDirection.ltr
         ..layout();
-      priceTp.paint(
+      gridTp.paint(
           canvas,
           Offset(
             0,
-            params.fitValue(y) - priceTp.height / 2,
+            params.fitValue(y) - gridTp.height / 2,
           ));
     });
   }
@@ -152,7 +152,7 @@ class NvBarChartPainter extends CustomPainter {
           style: params.dateStyle,
         ),
       )
-        ..textDirection = TextDirection.rtl
+        ..textDirection = TextDirection.ltr
         ..layout();
       textDate.paint(
           canvas,
