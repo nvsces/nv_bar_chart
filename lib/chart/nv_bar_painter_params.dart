@@ -12,6 +12,7 @@ class NvBarPainterParams {
   final double startOffset;
 
   final double maxValue;
+
   final double minValue;
   final double paddingBar;
 
@@ -39,14 +40,20 @@ class NvBarPainterParams {
     required this.gridStyle,
   });
 
+  double get _maxValue {
+    if (maxValue == 0) return 3;
+    return maxValue;
+  }
+
   double get chartWidth => size.width - 40;
 
   double get chartHeight => size.height - 10.0;
 
   double get priceHeight => chartHeight - 120.0;
 
-  double fitValue(double y) =>
-      90 + (priceHeight * (maxValue - y) / (maxValue - minValue));
+  double fitValue(double y) {
+    return 90 + (priceHeight * (_maxValue - y) / (_maxValue - minValue));
+  }
 
   static NvBarPainterParams lerp(
       NvBarPainterParams a, NvBarPainterParams b, double t) {
@@ -63,7 +70,7 @@ class NvBarPainterParams {
       paddingBar: b.paddingBar,
       sectionForBarsWidth: b.sectionForBarsWidth,
       startOffset: b.startOffset,
-      maxValue: lerpField((p) => p.maxValue),
+      maxValue: lerpField((p) => p._maxValue),
       minValue: lerpField((p) => p.minValue),
       xShift: b.xShift,
     );
@@ -77,7 +84,7 @@ class NvBarPainterParams {
         startOffset != other.startOffset ||
         xShift != other.xShift) return true;
 
-    if (maxValue != other.maxValue || minValue != other.minValue) return true;
+    if (_maxValue != other._maxValue || minValue != other.minValue) return true;
 
     return false;
   }
