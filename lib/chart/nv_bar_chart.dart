@@ -44,14 +44,36 @@ class _NvBarChartState extends State<NvBarChart> {
   BarStyle get barStyle => widget.barStyle ?? BarStyle.defaultStyle();
   GridStyle get gridStyle => widget.gridStyle ?? GridStyle.gefaultStyle();
 
-  List<BarData> get bars => [
+  List<BarData> get bars {
+    if (widget.bars.length < 2) {
+      return [
+        BarData(
+          date: '',
+          valueBar1: 0,
+          valueBar2: 0,
+        ),
         BarData(
           date: '',
           valueBar1: 0,
           valueBar2: 0,
         ),
         ...widget.bars,
+        BarData(
+          date: '',
+          valueBar1: 0,
+          valueBar2: 0,
+        ),
       ];
+    }
+    return [
+      BarData(
+        date: '',
+        valueBar1: 0,
+        valueBar2: 0,
+      ),
+      ...widget.bars,
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -146,6 +168,9 @@ class _NvBarChartState extends State<NvBarChart> {
     _prevSectionForBarsWidth = _sectionForBarsWidth;
     _prevStartOffset = _startOffset;
     _initialFocalPoint = focalPoint;
+    print('_initialFocalPoint:$_initialFocalPoint');
+    print('_prevSectionForBarsWidth:$_prevSectionForBarsWidth');
+    print('_prevStartOffset:$_prevStartOffset');
   }
 
   _onScaleUpdate(double scale, Offset focalPoint, double w) {
@@ -173,6 +198,8 @@ class _NvBarChartState extends State<NvBarChart> {
     setState(() {
       _sectionForBarsWidth = sectionForBarsWidth;
       _startOffset = startOffset;
+      print('_sectionForBarsWidth:$_sectionForBarsWidth');
+      print('_startOffset:$startOffset');
     });
   }
 
