@@ -38,8 +38,8 @@ class DataSource {
     return List.generate(count, (i) {
       return BarData(
         date: '${i + 1} Апр',
-        valueBar1: i + 1,
-        valueBar2: i + 1,
+        valueBar1: i,
+        valueBar2: i,
       );
     });
   }

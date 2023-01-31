@@ -115,7 +115,7 @@ class NvBarChartPainter extends CustomPainter {
       );
       final textPositionL2 = valueBar2.toStringAsFixed(0).length > 1
           ? x + dl / 8
-          : x + 1.8 * dl / 4;
+          : x + 1.75 * dl / 4 - 1;
       final countTextL2 = TextPainter(
         textScaleFactor: legendScaleFactor,
         textAlign: TextAlign.end,
